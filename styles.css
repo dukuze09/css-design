@@ -1,0 +1,101 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Container */
+.container {
+    position: absolute;
+    top: 20%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Circle */
+.circle {
+    position: absolute;
+    background: transparent;
+    width: calc(var(--i, 1) * 2.5vmin);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 3px solid rgb(0, 255, 13);
+    transform-style: preserve-3d;
+    transform: rotateX(70deg) translateZ(50px);
+    animation: animate 3s ease-in-out calc(var(--i, 1) * 0.08s) infinite;
+    box-shadow: 0 0 15px rgb(124, 124, 124), inset 0 8px 15px rgb(124, 124, 124);
+}
+
+/* Animation */
+@keyframes animate {
+    0%, 100% {
+        transform: rotateX(70deg) translateZ(50px) translateY(0);
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        transform: rotateX(70deg) translateZ(50px) translateY(-50vmin);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Heart */
+.heart {
+    position: absolute;
+    bottom: 10vh;
+    width: 78px;
+    height: 70px;
+    background-color: rgb(0, 255, 13);
+    transform: rotate(-45deg) scale(0); /* Start from zero scale */
+    animation: growAndPulse 3s ease-in-out forwards infinite;
+}
+
+/* Heart shape */
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: rgb(0, 255, 13);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -45px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 45px;
+}
+
+/* Heart animation */
+@keyframes growAndPulse {
+    0% {
+        transform: rotate(-45deg) scale(0); /* Start invisible */
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        transform: rotate(-45deg) scale(1.2); /* Pulse and color shift */
+        filter: hue-rotate(180deg);
+    }
+    100% {
+        transform: rotate(-45deg) scale(1); /* Final state */
+        filter: hue-rotate(360deg);
+    }
+}
